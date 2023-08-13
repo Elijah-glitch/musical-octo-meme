@@ -4,78 +4,46 @@
     <title>Countdown Timer</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-        .countdown-container {
-            margin-top: 50px;
-            position: relative;
-        }
-        .countdown {
-            font-size: 2em;
-        }
-        .countdown-animation {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transform-origin: center;
-            animation: countdown-animation 10s linear infinite;
-        }
-        @keyframes countdown-animation {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time {
+    font-size: 3rem;
+    margin: 0 0.5rem;
+}
+
+.time-label {
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin: 0 0.5rem;
+}
     </style>
-    <script>
-        function getTimeRemaining() {
-            var now = new Date();
-            var targetDate = new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000); // 2 days in milliseconds
-            var timeRemaining = targetDate - now;
-            
-            var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-            
-            return {
-                days: days,
-                hours: hours,
-                minutes: minutes,
-                seconds: seconds
-            };
-        }
-        
-        function updateCountdown() {
-            var countdownElem = document.getElementById("countdown");
-            var timeRemaining = getTimeRemaining();
-            
-            countdownElem.innerHTML = `${timeRemaining.days} days ${timeRemaining.hours} hours ${timeRemaining.minutes} minutes ${timeRemaining.seconds} seconds`;
-        }
-        
-        setInterval(updateCountdown, 1000);
-    </script>
+
 </head>
 <body>
-    <div class="countdown-container">
-        <div class="countdown" id="countdown">
-            <!-- Countdown will be displayed here -->
-        </div>
-        <div class="countdown-animation"></div>
+    <div class="timer">
+        <div class="time" id="days">00</div>
+        <div class="time-label">Days</div>
+        <div class="time" id="hours">00</div>
+        <div class="time-label">Hours</div>
+        <div class="time" id="minutes">00</div>
+        <div class="time-label">Minutes</div>
+        <div class="time" id="seconds">00</div>
+        <div class="time-label">Seconds</div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
