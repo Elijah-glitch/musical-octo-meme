@@ -1,49 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Countdown Timer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Downloader</title>
     <style>
-        body {
-    font-family: Arial, sans-serif;
-    background-color: #121212;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.timer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.time {
-    font-size: 3rem;
-    margin: 0 0.5rem;
-}
-
-.time-label {
-    font-size: 1rem;
-    text-transform: uppercase;
-    margin: 0 0.5rem;
-}
+        /* ... Previous CSS styles ... */
     </style>
-
 </head>
 <body>
-    <div class="timer">
-        <div class="time" id="days">00</div>
-        <div class="time-label">Days</div>
-        <div class="time" id="hours">00</div>
-        <div class="time-label">Hours</div>
-        <div class="time" id="minutes">00</div>
-        <div class="time-label">Minutes</div>
-        <div class="time" id="seconds">00</div>
-        <div class="time-label">Seconds</div>
+    <div class="container">
+        <h1>Video Downloader</h1>
+        <input type="text" id="videoUrl" placeholder="Enter video URL">
+        <select id="platform">
+            <option value="tiktok">TikTok</option>
+            <option value="youtube">YouTube</option>
+        </select>
+        <button id="downloadButton">Download</button>
+        <div id="downloadLink"></div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        const downloadButton = document.getElementById('downloadButton');
+        const downloadLink = document.getElementById('downloadLink');
+
+        downloadButton.addEventListener('click', () => {
+            const videoUrl = document.getElementById('videoUrl').value;
+            const platform = document.getElementById('platform').value;
+            if (platform === 'tiktok') {
+                const videoId = getVideoIdFromTikTokUrl(videoUrl);
+                // ... Logic to generate TikTok download link ...
+            } else if (platform === 'youtube') {
+                const videoId = getVideoIdFromYouTubeUrl(videoUrl);
+                const downloadUrl = `https://www.youtube.com/watch?v=${videoId}`;
+                const a = document.createElement('a');
+                a.href = downloadUrl;
+                a.target = "_blank";
+                a.textContent = "Download YouTube Video";
+                downloadLink.innerHTML = '';
+                downloadLink.appendChild(a);
+            }
+        });
+
+        function getVideoIdFromTikTokUrl(url) {
+            // ... Logic to extract TikTok video ID ...
+        }
+
+        function getVideoIdFromYouTubeUrl(url) {
+            const match = url.match(/[?&]v=([^&]+)/);
+            return match ? match[1] : null;
+        }
+    </script>
 </body>
 </html>
